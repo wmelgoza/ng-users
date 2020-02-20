@@ -29,7 +29,7 @@ export class UsersComponent implements OnInit {
     this.usersService.getUsers().subscribe(
       (response) => {
         this.users = response,
-        console.log(this.users)
+        response.JSONobject(this.users)
       }
     );
   }
