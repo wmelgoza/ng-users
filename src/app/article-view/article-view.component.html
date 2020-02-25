@@ -3,6 +3,6 @@
   <div><strong>Description:</strong> {{article.description}}</div>
   <div><strong>Keywords:</strong> {{article.keywords}}</div>
   <div><strong>Body:</strong> {{article.body}}</div>
-  <button>Edit</button>
-  <button>Delete</button>
+  <button [routerLink]="['/articles/edit/', article._id]">Edit</button>
+  <button (click)="deleteArticle(article._id)">Delete</button>
 </div>

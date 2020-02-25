@@ -20,15 +20,22 @@ export class ArticleViewComponent implements OnInit {
     ) {}
 
    ngOnInit() {
-    const id = this.route.snapshot.paramMap.get('id');
-    this.getArticle(id);
+    const _id = this.route.snapshot.paramMap.get('id');
+    this.getArticle(_id);
   }
-  getArticle(id): void {
-    this.articlesService.getArticle(id).subscribe(
+  getArticle(_id): void {
+    this.articlesService.getArticle(_id).subscribe(
       (response:any) => {
         this.article = response.article
       }
     );
+  }
+  deleteArticle(_id: string): void {
+    if(confirm("Are you sure to delete " + this.article.title)) {
+      this.articlesService.deleteArticle(_id).subscribe(
+        ()=>{this.router.navigate(['/articles'])}
+      );
+    }
   }
 
 
