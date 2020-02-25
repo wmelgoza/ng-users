@@ -13,13 +13,19 @@ const httpOptions = {
 export class UsersService {
   private url: string = 'http://localhost:3000/api/users';
   constructor(private http: HttpClient) { }
-  getUser(id: string): Observable<User> {
-    return this.http.get<User>(`${this.url}/${id}`);
-  }
   getUsers(): Observable<User> {
     return this.http.get<User>(this.url);
   }
+  getUser(id: string): Observable<User> {
+    return this.http.get<User>(`${this.url}/${id}`);
+  }
   createUser (user: User): Observable<User> {
     return this.http.post<User>(this.url, user, httpOptions);
+  }
+  editUser (user: User): Observable<User> {
+    return this.http.put<User>(this.url, user, httpOptions);
+  }
+  deleteUser (id: string): Observable<User> {
+    return this.http.delete<User>(`${this.url}/${id}`);
   }
 }
