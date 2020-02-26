@@ -21,36 +21,38 @@ export class ArticleEditComponent implements OnInit {
     private articlesService: ArticlesService,
     private route: ActivatedRoute,
     private router: Router
+
   ) { }
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.getArticle(id);
   }
-  getArticle(_id): void {
-    this.articlesService.getArticle(_id).subscribe(
-      (response:any) => {
+
+  getArticle(id): void {
+    this.articlesService.getArticle(id).subscribe(
+      (response: any) => {
         this.article = response.article
       }
     );
-}
-response(response): void{
-  if(response.success===false){
-    this.errors = response.error.errors;
-    this.errorMessage = response.error.message;
   }
 
-  if(response.success===true){
-    this.router.navigate(['/articles/view/', response.article._id]);
-  }
-}
-
-onSubmit(): void {
-  this.articlesService.editArticle(this.article).subscribe(
-    (response) => {
-      this.response(response)
+  response(response): void {
+    if (response.success === false) {
+      this.errors = response.error.errors;
+      this.errorMessage = response.error.message;
     }
-  );
-}
 
+    if (response.success === true) {
+      this.router.navigate(['/articles/view/', response.article._id]);
+    }
+  }
+
+  onSubmit(): void {
+    this.articlesService.editArticle(this.article).subscribe(
+      (response) => {
+        this.response(response)
+      }
+    );
+  }
 }
